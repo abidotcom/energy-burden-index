@@ -83,8 +83,9 @@ Open your browser at `http://localhost:8501`
 
 ## Team
 
-- **Abishek** — Data pipeline, EBI model, K-Means clustering, Folium map, GitHub
-- **Abishek 2** — Streamlit dashboard, slide deck, video presentation
+- **Abishek Sankaranarayanan** — Data pipeline, EBI model, K-Means clustering, Folium map, GitHub
+- **Abishek ammasai thangaraju** — Streamlit dashboard, slide deck, video presentation
+- **Ryutaro sobajima** -Problem framing, presentation, storytelling, script
 
 ---
 
