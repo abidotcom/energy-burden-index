@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a91cefb5fc9a48ac77ef67bc8f3b884b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position:fixed;bottom:30px;left:30px;z-index:1000;
+     background:white;padding:12px 16px;border-radius:8px;
+     border:1px solid #ddd;font-family:sans-serif;font-size:13px;">
+  <b>Energy Burden Index</b><br><br>
+  <span style="background:#E24B4A;display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px"></span>Critical (≥75)<br>
+  <span style="background:#EF9F27;display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px"></span>High (55–74)<br>
+  <span style="background:#97C459;display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px"></span>Moderate (35–54)<br>
+  <span style="background:#5DCAA5;display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px"></span>Low (&lt;35)<br><br>
+  <span style="color:#A32D2D">⚠</span> = Incentive gap detected
+</div>
+    
+            <div class="folium-map" id="map_a91cefb5fc9a48ac77ef67bc8f3b884b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a91cefb5fc9a48ac77ef67bc8f3b884b = L.map(
+                "map_a91cefb5fc9a48ac77ef67bc8f3b884b",
+                {
+                    center: [43.7184, -79.3776],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f9a0410811142c13c83750a4a82e0b57 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f9a0410811142c13c83750a4a82e0b57.addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+            var circle_marker_8df852f2f0b50f435bd7319b0fdedcc1 = L.circleMarker(
+                [43.6604, -79.3598],
+                {"bubblingMouseEvents": true, "color": "#E24B4A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E24B4A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.549999999999997, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_9b9f37a86b24b672d829c03fa2793fa7 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_7c1f94c240037598419e160e34be01c3 = $(`<div id="html_7c1f94c240037598419e160e34be01c3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Regent Park</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 82.5/100<br>       <b>Risk Tier:</b> <span style="color:#E24B4A">Critical</span><br>       <b>Renter Share:</b> 82%<br>       <b>Median Income:</b> $28,000<br>       <b>Avg Building Age:</b> 1968s<br>       <b>Monthly Energy Spend:</b> $210<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_9b9f37a86b24b672d829c03fa2793fa7.setContent(html_7c1f94c240037598419e160e34be01c3);
+            
+        
+
+        circle_marker_8df852f2f0b50f435bd7319b0fdedcc1.bindPopup(popup_9b9f37a86b24b672d829c03fa2793fa7)
+        ;
+
+        
+    
+    
+            circle_marker_8df852f2f0b50f435bd7319b0fdedcc1.bindTooltip(
+                `<div>
+                     Regent Park — EBI 82.5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_428940010c1688a06a19d3f250172bc0 = L.circleMarker(
+                [43.7376, -79.5072],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.646, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_bc37e446a7a7e39276fdbbab5f8974b2 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_533bf1b1c7eef95361e250c5986e9c31 = $(`<div id="html_533bf1b1c7eef95361e250c5986e9c31" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Jane & Finch</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 68.9/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 74%<br>       <b>Median Income:</b> $31,000<br>       <b>Avg Building Age:</b> 1971s<br>       <b>Monthly Energy Spend:</b> $195<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_bc37e446a7a7e39276fdbbab5f8974b2.setContent(html_533bf1b1c7eef95361e250c5986e9c31);
+            
+        
+
+        circle_marker_428940010c1688a06a19d3f250172bc0.bindPopup(popup_bc37e446a7a7e39276fdbbab5f8974b2)
+        ;
+
+        
+    
+    
+            circle_marker_428940010c1688a06a19d3f250172bc0.bindTooltip(
+                `<div>
+                     Jane & Finch — EBI 68.9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9dd3aa9523686cf63798ee409bae1925 = L.circleMarker(
+                [43.7765, -79.2318],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.204, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_981b4198bd08109c70bbb43e20e350c8 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_509dbc79e9c743349291e248d64f68d4 = $(`<div id="html_509dbc79e9c743349291e248d64f68d4" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Malvern</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 58.6/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 68%<br>       <b>Median Income:</b> $33,000<br>       <b>Avg Building Age:</b> 1978s<br>       <b>Monthly Energy Spend:</b> $188<br>       <b>Cluster:</b> Cluster B — High burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_981b4198bd08109c70bbb43e20e350c8.setContent(html_509dbc79e9c743349291e248d64f68d4);
+            
+        
+
+        circle_marker_9dd3aa9523686cf63798ee409bae1925.bindPopup(popup_981b4198bd08109c70bbb43e20e350c8)
+        ;
+
+        
+    
+    
+            circle_marker_9dd3aa9523686cf63798ee409bae1925.bindTooltip(
+                `<div>
+                     Malvern — EBI 58.6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d8eb333893e7a68d3d7fd731655a5077 = L.circleMarker(
+                [43.7002, -79.5148],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.814, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_d38680bfc8b4d49b8e845ee32899e370 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_a4a4cf2aa8219f9f65fb8905b4ea5afa = $(`<div id="html_a4a4cf2aa8219f9f65fb8905b4ea5afa" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Weston</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 70.1/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 71%<br>       <b>Median Income:</b> $34,000<br>       <b>Avg Building Age:</b> 1965s<br>       <b>Monthly Energy Spend:</b> $202<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_d38680bfc8b4d49b8e845ee32899e370.setContent(html_a4a4cf2aa8219f9f65fb8905b4ea5afa);
+            
+        
+
+        circle_marker_d8eb333893e7a68d3d7fd731655a5077.bindPopup(popup_d38680bfc8b4d49b8e845ee32899e370)
+        ;
+
+        
+    
+    
+            circle_marker_d8eb333893e7a68d3d7fd731655a5077.bindTooltip(
+                `<div>
+                     Weston — EBI 70.1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_45c3aae0493e2c67e63e67403d1bf3f2 = L.circleMarker(
+                [43.7127, -79.3388],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.08, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_b3aa324df2139d0481297a51c0d60292 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_3ff4a70f621359f7cf3c7f76ba0f5295 = $(`<div id="html_3ff4a70f621359f7cf3c7f76ba0f5295" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Flemingdon Park</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 72.0/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 78%<br>       <b>Median Income:</b> $30,000<br>       <b>Avg Building Age:</b> 1972s<br>       <b>Monthly Energy Spend:</b> $198<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_b3aa324df2139d0481297a51c0d60292.setContent(html_3ff4a70f621359f7cf3c7f76ba0f5295);
+            
+        
+
+        circle_marker_45c3aae0493e2c67e63e67403d1bf3f2.bindPopup(popup_b3aa324df2139d0481297a51c0d60292)
+        ;
+
+        
+    
+    
+            circle_marker_45c3aae0493e2c67e63e67403d1bf3f2.bindTooltip(
+                `<div>
+                     Flemingdon Park — EBI 72.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7332d633c2c19928164b2797514186b5 = L.circleMarker(
+                [43.7234, -79.5651],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.008000000000003, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_a825d97f63be2609921b9ed89170be03 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_6eb1bad956fef5bece73d7961c7e4d05 = $(`<div id="html_6eb1bad956fef5bece73d7961c7e4d05" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Rexdale</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 57.2/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 66%<br>       <b>Median Income:</b> $35,000<br>       <b>Avg Building Age:</b> 1974s<br>       <b>Monthly Energy Spend:</b> $185<br>       <b>Cluster:</b> Cluster B — High burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_a825d97f63be2609921b9ed89170be03.setContent(html_6eb1bad956fef5bece73d7961c7e4d05);
+            
+        
+
+        circle_marker_7332d633c2c19928164b2797514186b5.bindPopup(popup_a825d97f63be2609921b9ed89170be03)
+        ;
+
+        
+    
+    
+            circle_marker_7332d633c2c19928164b2797514186b5.bindTooltip(
+                `<div>
+                     Rexdale — EBI 57.2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0ee6838eb49e8806f18249518f29a090 = L.circleMarker(
+                [43.7089, -79.3367],
+                {"bubblingMouseEvents": true, "color": "#E24B4A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E24B4A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.906, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_8b25eaea96dd41768a147dcdb4304cfb = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_ece63f88272bbfc72fd16d1b459daf2e = $(`<div id="html_ece63f88272bbfc72fd16d1b459daf2e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Thorncliffe Park</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 77.9/100<br>       <b>Risk Tier:</b> <span style="color:#E24B4A">Critical</span><br>       <b>Renter Share:</b> 81%<br>       <b>Median Income:</b> $29,000<br>       <b>Avg Building Age:</b> 1970s<br>       <b>Monthly Energy Spend:</b> $205<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_8b25eaea96dd41768a147dcdb4304cfb.setContent(html_ece63f88272bbfc72fd16d1b459daf2e);
+            
+        
+
+        circle_marker_0ee6838eb49e8806f18249518f29a090.bindPopup(popup_8b25eaea96dd41768a147dcdb4304cfb)
+        ;
+
+        
+    
+    
+            circle_marker_0ee6838eb49e8806f18249518f29a090.bindTooltip(
+                `<div>
+                     Thorncliffe Park — EBI 77.9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_67d4f99483695855922ddbf0d61650d7 = L.circleMarker(
+                [43.7523, -79.2341],
+                {"bubblingMouseEvents": true, "color": "#97C459", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#97C459", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.398, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_66fb63d4da206a7782973ff1e7e647c9 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_0eb421b699464319da52df0ad57ab92f = $(`<div id="html_0eb421b699464319da52df0ad57ab92f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Scarborough Village</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 45.7/100<br>       <b>Risk Tier:</b> <span style="color:#97C459">Moderate</span><br>       <b>Renter Share:</b> 58%<br>       <b>Median Income:</b> $38,000<br>       <b>Avg Building Age:</b> 1980s<br>       <b>Monthly Energy Spend:</b> $175<br>       <b>Cluster:</b> Cluster B — High burden<br>            </div>     </div>`)[0];
+                popup_66fb63d4da206a7782973ff1e7e647c9.setContent(html_0eb421b699464319da52df0ad57ab92f);
+            
+        
+
+        circle_marker_67d4f99483695855922ddbf0d61650d7.bindPopup(popup_66fb63d4da206a7782973ff1e7e647c9)
+        ;
+
+        
+    
+    
+            circle_marker_67d4f99483695855922ddbf0d61650d7.bindTooltip(
+                `<div>
+                     Scarborough Village — EBI 45.7
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_798bb4e54c7236355c478332671e4b2b = L.circleMarker(
+                [43.7615, -79.413],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.704, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_0312d17e0bda50cdadbd7a9298464701 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_ac852e717e313905e1d851f2b5be8ef8 = $(`<div id="html_ac852e717e313905e1d851f2b5be8ef8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">North York Centre</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 33.6/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 55%<br>       <b>Median Income:</b> $47,000<br>       <b>Avg Building Age:</b> 1985s<br>       <b>Monthly Energy Spend:</b> $162<br>       <b>Cluster:</b> Cluster C — Moderate burden<br>            </div>     </div>`)[0];
+                popup_0312d17e0bda50cdadbd7a9298464701.setContent(html_ac852e717e313905e1d851f2b5be8ef8);
+            
+        
+
+        circle_marker_798bb4e54c7236355c478332671e4b2b.bindPopup(popup_0312d17e0bda50cdadbd7a9298464701)
+        ;
+
+        
+    
+    
+            circle_marker_798bb4e54c7236355c478332671e4b2b.bindTooltip(
+                `<div>
+                     North York Centre — EBI 33.6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b7db77ca4cc788b864848df4cb2d665a = L.circleMarker(
+                [43.6435, -79.5626],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.654, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_b5b5b3a45b0bf69c9a2ac78c22e4fb32 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_cf14757ed775ffac22dc2793cb09eab6 = $(`<div id="html_cf14757ed775ffac22dc2793cb09eab6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Etobicoke Centre</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 26.1/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 49%<br>       <b>Median Income:</b> $52,000<br>       <b>Avg Building Age:</b> 1988s<br>       <b>Monthly Energy Spend:</b> $155<br>       <b>Cluster:</b> Cluster C — Moderate burden<br>            </div>     </div>`)[0];
+                popup_b5b5b3a45b0bf69c9a2ac78c22e4fb32.setContent(html_cf14757ed775ffac22dc2793cb09eab6);
+            
+        
+
+        circle_marker_b7db77ca4cc788b864848df4cb2d665a.bindPopup(popup_b5b5b3a45b0bf69c9a2ac78c22e4fb32)
+        ;
+
+        
+    
+    
+            circle_marker_b7db77ca4cc788b864848df4cb2d665a.bindTooltip(
+                `<div>
+                     Etobicoke Centre — EBI 26.1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_323febc890fe25a50044401fa5a6acff = L.circleMarker(
+                [43.7754, -79.3398],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.828, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_23fa2ff097af8c99fdc0ec10bcf44f91 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_4143cf533b7d78e75197614629bcfc33 = $(`<div id="html_4143cf533b7d78e75197614629bcfc33" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Don Valley Village</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 20.2/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 44%<br>       <b>Median Income:</b> $56,000<br>       <b>Avg Building Age:</b> 1990s<br>       <b>Monthly Energy Spend:</b> $148<br>       <b>Cluster:</b> Cluster C — Moderate burden<br>            </div>     </div>`)[0];
+                popup_23fa2ff097af8c99fdc0ec10bcf44f91.setContent(html_4143cf533b7d78e75197614629bcfc33);
+            
+        
+
+        circle_marker_323febc890fe25a50044401fa5a6acff.bindPopup(popup_23fa2ff097af8c99fdc0ec10bcf44f91)
+        ;
+
+        
+    
+    
+            circle_marker_323febc890fe25a50044401fa5a6acff.bindTooltip(
+                `<div>
+                     Don Valley Village — EBI 20.2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f4a04893d4624957b23f2ec993a4c02 = L.circleMarker(
+                [43.6677, -79.3988],
+                {"bubblingMouseEvents": true, "color": "#97C459", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#97C459", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.224, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_be8f49a7d59b1c9911bda519c69ef23e = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_8cff3c435014796bb19d581d67c6bcdf = $(`<div id="html_8cff3c435014796bb19d581d67c6bcdf" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Annex</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 51.6/100<br>       <b>Risk Tier:</b> <span style="color:#97C459">Moderate</span><br>       <b>Renter Share:</b> 67%<br>       <b>Median Income:</b> $61,000<br>       <b>Avg Building Age:</b> 1955s<br>       <b>Monthly Energy Spend:</b> $170<br>       <b>Cluster:</b> Cluster B — High burden<br>            </div>     </div>`)[0];
+                popup_be8f49a7d59b1c9911bda519c69ef23e.setContent(html_8cff3c435014796bb19d581d67c6bcdf);
+            
+        
+
+        circle_marker_1f4a04893d4624957b23f2ec993a4c02.bindPopup(popup_be8f49a7d59b1c9911bda519c69ef23e)
+        ;
+
+        
+    
+    
+            circle_marker_1f4a04893d4624957b23f2ec993a4c02.bindTooltip(
+                `<div>
+                     Annex — EBI 51.6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_69e00562ad24ad755146d07c24278018 = L.circleMarker(
+                [43.6995, -79.4124],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.402000000000001, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_da5bd17f18fbfca1f719a0d86ef3f975 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_addc582a216daf010261c19f1b2af7b0 = $(`<div id="html_addc582a216daf010261c19f1b2af7b0" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Forest Hill</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 24.3/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 28%<br>       <b>Median Income:</b> $95,000<br>       <b>Avg Building Age:</b> 1952s<br>       <b>Monthly Energy Spend:</b> $130<br>       <b>Cluster:</b> Cluster D — Lower burden<br>            </div>     </div>`)[0];
+                popup_da5bd17f18fbfca1f719a0d86ef3f975.setContent(html_addc582a216daf010261c19f1b2af7b0);
+            
+        
+
+        circle_marker_69e00562ad24ad755146d07c24278018.bindPopup(popup_da5bd17f18fbfca1f719a0d86ef3f975)
+        ;
+
+        
+    
+    
+            circle_marker_69e00562ad24ad755146d07c24278018.bindTooltip(
+                `<div>
+                     Forest Hill — EBI 24.3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_60dcd05f9a071d598b8e07f4de39eeb1 = L.circleMarker(
+                [43.6532, -79.4638],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.99, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_c39b866d0d4d832bbffadbe438ad3a1d = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_97c92454568309148360cf48fb28206c = $(`<div id="html_97c92454568309148360cf48fb28206c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">High Park</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 28.5/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 40%<br>       <b>Median Income:</b> $82,000<br>       <b>Avg Building Age:</b> 1960s<br>       <b>Monthly Energy Spend:</b> $142<br>       <b>Cluster:</b> Cluster D — Lower burden<br>            </div>     </div>`)[0];
+                popup_c39b866d0d4d832bbffadbe438ad3a1d.setContent(html_97c92454568309148360cf48fb28206c);
+            
+        
+
+        circle_marker_60dcd05f9a071d598b8e07f4de39eeb1.bindPopup(popup_c39b866d0d4d832bbffadbe438ad3a1d)
+        ;
+
+        
+    
+    
+            circle_marker_60dcd05f9a071d598b8e07f4de39eeb1.bindTooltip(
+                `<div>
+                     High Park — EBI 28.5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f36bd5b4ef3d6de2bed90c0951f0b308 = L.circleMarker(
+                [43.707, -79.363],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.352, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_66fb9652d97d3caeeb6423895ca28a41 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_0b83865e8c530b0ee3be101fc3be69ab = $(`<div id="html_0b83865e8c530b0ee3be101fc3be69ab" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Leaside</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 16.8/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 22%<br>       <b>Median Income:</b> $110,000<br>       <b>Avg Building Age:</b> 1958s<br>       <b>Monthly Energy Spend:</b> $125<br>       <b>Cluster:</b> Cluster D — Lower burden<br>            </div>     </div>`)[0];
+                popup_66fb9652d97d3caeeb6423895ca28a41.setContent(html_0b83865e8c530b0ee3be101fc3be69ab);
+            
+        
+
+        circle_marker_f36bd5b4ef3d6de2bed90c0951f0b308.bindPopup(popup_66fb9652d97d3caeeb6423895ca28a41)
+        ;
+
+        
+    
+    
+            circle_marker_f36bd5b4ef3d6de2bed90c0951f0b308.bindTooltip(
+                `<div>
+                     Leaside — EBI 16.8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_339e6fc34f72ff30240e6218f286908e = L.circleMarker(
+                [43.6987, -79.3876],
+                {"bubblingMouseEvents": true, "color": "#5DCAA5", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5DCAA5", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.786, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_d40e9ed3f21fba6a7a5872b0f93bdfcd = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_259aca0f33415e7e61ed6b01342eb76a = $(`<div id="html_259aca0f33415e7e61ed6b01342eb76a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Mount Pleasant</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 19.9/100<br>       <b>Risk Tier:</b> <span style="color:#5DCAA5">Low</span><br>       <b>Renter Share:</b> 38%<br>       <b>Median Income:</b> $88,000<br>       <b>Avg Building Age:</b> 1975s<br>       <b>Monthly Energy Spend:</b> $145<br>       <b>Cluster:</b> Cluster C — Moderate burden<br>            </div>     </div>`)[0];
+                popup_d40e9ed3f21fba6a7a5872b0f93bdfcd.setContent(html_259aca0f33415e7e61ed6b01342eb76a);
+            
+        
+
+        circle_marker_339e6fc34f72ff30240e6218f286908e.bindPopup(popup_d40e9ed3f21fba6a7a5872b0f93bdfcd)
+        ;
+
+        
+    
+    
+            circle_marker_339e6fc34f72ff30240e6218f286908e.bindTooltip(
+                `<div>
+                     Mount Pleasant — EBI 19.9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf25e99fffe29207bd7c2b62715d1cb2 = L.circleMarker(
+                [43.6396, -79.4341],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.736, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_f5ebbb1c89c8d5ae9ffb836baefcb32e = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_cd565e5d0c732d8ccefb0e5619c2008e = $(`<div id="html_cd565e5d0c732d8ccefb0e5619c2008e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Parkdale</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 62.4/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 72%<br>       <b>Median Income:</b> $42,000<br>       <b>Avg Building Age:</b> 1962s<br>       <b>Monthly Energy Spend:</b> $190<br>       <b>Cluster:</b> Cluster B — High burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_f5ebbb1c89c8d5ae9ffb836baefcb32e.setContent(html_cd565e5d0c732d8ccefb0e5619c2008e);
+            
+        
+
+        circle_marker_cf25e99fffe29207bd7c2b62715d1cb2.bindPopup(popup_f5ebbb1c89c8d5ae9ffb836baefcb32e)
+        ;
+
+        
+    
+    
+            circle_marker_cf25e99fffe29207bd7c2b62715d1cb2.bindTooltip(
+                `<div>
+                     Parkdale — EBI 62.4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f39ce3b4c6f2e11a4b72c03ef61cab93 = L.circleMarker(
+                [43.6574, -79.3656],
+                {"bubblingMouseEvents": true, "color": "#E24B4A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E24B4A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.412, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_63f9a44b7e9e6eb5c9156d925f160b16 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_18d2fd9857b6832c1a79050badaa5634 = $(`<div id="html_18d2fd9857b6832c1a79050badaa5634" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Moss Park</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 95.8/100<br>       <b>Risk Tier:</b> <span style="color:#E24B4A">Critical</span><br>       <b>Renter Share:</b> 88%<br>       <b>Median Income:</b> $26,000<br>       <b>Avg Building Age:</b> 1960s<br>       <b>Monthly Energy Spend:</b> $220<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_63f9a44b7e9e6eb5c9156d925f160b16.setContent(html_18d2fd9857b6832c1a79050badaa5634);
+            
+        
+
+        circle_marker_f39ce3b4c6f2e11a4b72c03ef61cab93.bindPopup(popup_63f9a44b7e9e6eb5c9156d925f160b16)
+        ;
+
+        
+    
+    
+            circle_marker_f39ce3b4c6f2e11a4b72c03ef61cab93.bindTooltip(
+                `<div>
+                     Moss Park — EBI 95.8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a18f9963f20a026e50cc3207630e6864 = L.circleMarker(
+                [43.7248, -79.4588],
+                {"bubblingMouseEvents": true, "color": "#EF9F27", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#EF9F27", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.982, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_c2e7e06992af306ab6326841fd60b37a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_64d48f428c3cccd6cfd25f881d2c1b2b = $(`<div id="html_64d48f428c3cccd6cfd25f881d2c1b2b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Lawrence Heights</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 71.3/100<br>       <b>Risk Tier:</b> <span style="color:#EF9F27">High</span><br>       <b>Renter Share:</b> 76%<br>       <b>Median Income:</b> $32,000<br>       <b>Avg Building Age:</b> 1969s<br>       <b>Monthly Energy Spend:</b> $200<br>       <b>Cluster:</b> Cluster A — Highest burden<br>       <b style="color:#A32D2D">⚠ Incentive gap — renter programs needed</b>     </div>     </div>`)[0];
+                popup_c2e7e06992af306ab6326841fd60b37a.setContent(html_64d48f428c3cccd6cfd25f881d2c1b2b);
+            
+        
+
+        circle_marker_a18f9963f20a026e50cc3207630e6864.bindPopup(popup_c2e7e06992af306ab6326841fd60b37a)
+        ;
+
+        
+    
+    
+            circle_marker_a18f9963f20a026e50cc3207630e6864.bindTooltip(
+                `<div>
+                     Lawrence Heights — EBI 71.3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c87c5d5096029bad83b40cff2c42de29 = L.circleMarker(
+                [43.7894, -79.271],
+                {"bubblingMouseEvents": true, "color": "#97C459", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#97C459", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.636, "stroke": true, "weight": 3}
+            ).addTo(map_a91cefb5fc9a48ac77ef67bc8f3b884b);
+        
+    
+        var popup_9373c16687ccd0740c13e902a1306516 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_56663b3d13df46e03832858e6b497ecd = $(`<div id="html_56663b3d13df46e03832858e6b497ecd" style="width: 100.0%; height: 100.0%;">     <div style="font-family:sans-serif;min-width:220px;font-size:13px;">       <b style="font-size:15px">Agincourt</b><br>       <hr style="margin:4px 0">       <b>EBI Score:</b> 47.4/100<br>       <b>Risk Tier:</b> <span style="color:#97C459">Moderate</span><br>       <b>Renter Share:</b> 61%<br>       <b>Median Income:</b> $37,000<br>       <b>Avg Building Age:</b> 1982s<br>       <b>Monthly Energy Spend:</b> $178<br>       <b>Cluster:</b> Cluster B — High burden<br>            </div>     </div>`)[0];
+                popup_9373c16687ccd0740c13e902a1306516.setContent(html_56663b3d13df46e03832858e6b497ecd);
+            
+        
+
+        circle_marker_c87c5d5096029bad83b40cff2c42de29.bindPopup(popup_9373c16687ccd0740c13e902a1306516)
+        ;
+
+        
+    
+    
+            circle_marker_c87c5d5096029bad83b40cff2c42de29.bindTooltip(
+                `<div>
+                     Agincourt — EBI 47.4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

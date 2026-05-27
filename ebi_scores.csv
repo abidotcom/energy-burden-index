@@ -1,0 +1,21 @@
+neighbourhood,median_income,renter_pct,avg_building_year,avg_energy_spend_monthly,lat,lon,building_age,monthly_income,energy_burden_ratio,ebi_score,risk_tier,incentive_gap,cluster,cluster_label
+Regent Park,28000,82,1968,210,43.6604,-79.3598,58,2333.3333333333335,0.09,82.5,Critical,True,3,Cluster A — Highest burden
+Jane & Finch,31000,74,1971,195,43.7376,-79.5072,55,2583.3333333333335,0.07548387096774194,68.9,High,True,3,Cluster A — Highest burden
+Malvern,33000,68,1978,188,43.7765,-79.2318,48,2750.0,0.06836363636363636,58.6,High,True,1,Cluster B — High burden
+Weston,34000,71,1965,202,43.7002,-79.5148,61,2833.3333333333335,0.07129411764705881,70.1,High,True,3,Cluster A — Highest burden
+Flemingdon Park,30000,78,1972,198,43.7127,-79.3388,54,2500.0,0.0792,72.0,High,True,3,Cluster A — Highest burden
+Rexdale,35000,66,1974,185,43.7234,-79.5651,52,2916.6666666666665,0.06342857142857143,57.2,High,True,1,Cluster B — High burden
+Thorncliffe Park,29000,81,1970,205,43.7089,-79.3367,56,2416.6666666666665,0.08482758620689655,77.9,Critical,True,3,Cluster A — Highest burden
+Scarborough Village,38000,58,1980,175,43.7523,-79.2341,46,3166.6666666666665,0.05526315789473685,45.7,Moderate,False,1,Cluster B — High burden
+North York Centre,47000,55,1985,162,43.7615,-79.413,41,3916.6666666666665,0.04136170212765958,33.6,Low,False,2,Cluster C — Moderate burden
+Etobicoke Centre,52000,49,1988,155,43.6435,-79.5626,38,4333.333333333333,0.03576923076923077,26.1,Low,False,2,Cluster C — Moderate burden
+Don Valley Village,56000,44,1990,148,43.7754,-79.3398,36,4666.666666666667,0.031714285714285716,20.2,Low,False,2,Cluster C — Moderate burden
+Annex,61000,67,1955,170,43.6677,-79.3988,71,5083.333333333333,0.03344262295081967,51.6,Moderate,False,1,Cluster B — High burden
+Forest Hill,95000,28,1952,130,43.6995,-79.4124,74,7916.666666666667,0.016421052631578947,24.3,Low,False,0,Cluster D — Lower burden
+High Park,82000,40,1960,142,43.6532,-79.4638,66,6833.333333333333,0.02078048780487805,28.5,Low,False,0,Cluster D — Lower burden
+Leaside,110000,22,1958,125,43.707,-79.363,68,9166.666666666666,0.013636363636363637,16.8,Low,False,0,Cluster D — Lower burden
+Mount Pleasant,88000,38,1975,145,43.6987,-79.3876,51,7333.333333333333,0.019772727272727275,19.9,Low,False,2,Cluster C — Moderate burden
+Parkdale,42000,72,1962,190,43.6396,-79.4341,64,3500.0,0.054285714285714284,62.4,High,True,1,Cluster B — High burden
+Moss Park,26000,88,1960,220,43.6574,-79.3656,66,2166.6666666666665,0.10153846153846155,95.8,Critical,True,3,Cluster A — Highest burden
+Lawrence Heights,32000,76,1969,200,43.7248,-79.4588,57,2666.6666666666665,0.07500000000000001,71.3,High,True,3,Cluster A — Highest burden
+Agincourt,37000,61,1982,178,43.7894,-79.271,44,3083.3333333333335,0.05772972972972973,47.4,Moderate,False,1,Cluster B — High burden
